@@ -24,4 +24,7 @@ protected:
 
 	UPROPERTY(EditAnywhere)
 	float MoveSpeed;
+
+	UPROPERTY(EditAnywhere, Meta = (MakeEditWidget = true))
+	FVector TargetLocation;
 };
