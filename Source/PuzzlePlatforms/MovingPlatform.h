@@ -31,4 +31,11 @@ protected:
 private:
 	FVector GlobalTargetLocation;
 	FVector GlobalStartLocation;
+
+	UPROPERTY(EditAnywhere)
+	int ActiveTriggers = 1;
+
+public:
+	void AddActiveTrigger();
+	void RemoveActiveTrigger();
 };
