@@ -3,6 +3,7 @@
 
 #include "PuzzlePlatformsGameInstance.h"
 #include "Engine/Engine.h"
+#include "GameFramework/PlayerController.h"
 
 UPuzzlePlatformsGameInstance::UPuzzlePlatformsGameInstance(const FObjectInitializer & ObjectInitializer)
 {
@@ -34,8 +35,8 @@ void UPuzzlePlatformsGameInstance::Join(const FString& IpAddress)
 
 	Engine->AddOnScreenDebugMessage(0, 2.0f, FColor::Green, FString::Printf(TEXT("Joining %s"), *IpAddress));
 
-	UWorld* World = GetWorld();
-	if (!ensure(World != nullptr)) return;
+	APlayerController* PlayerController = GetFirstLocalPlayerController();
+	if (!ensure(PlayerController != nullptr)) return;
 
-	World->ServerTravel(FString::Printf(TEXT("%s -game"), *IpAddress));
+	PlayerController->ClientTravel(IpAddress, ETravelType::TRAVEL_Absolute);
 }
