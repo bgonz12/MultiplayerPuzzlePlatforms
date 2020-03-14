@@ -24,7 +24,7 @@ public:
 	void LoadMenu();
 
 	UFUNCTION(Exec)
-	void Host() override;
+	void Host();
 
 	UFUNCTION(Exec)
 	void Join(const FString& IpAddress);
