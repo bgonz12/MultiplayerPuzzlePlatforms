@@ -86,8 +86,3 @@ void UMainMenu::OpenJoinMenu()
 	if (!ensure(JoinMenu != nullptr)) return;
 	MenuSwitcher->SetActiveWidget(JoinMenu);
 }
-
-void UMainMenu::SetMenuInterface(IMenuInterface* MenuInterfaceToSet)
-{
-	this->MenuInterface = MenuInterfaceToSet;
-}
