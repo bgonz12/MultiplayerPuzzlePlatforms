@@ -27,7 +27,6 @@ bool UMenuWidget::Setup()
 	this->AddToViewport();
 
 	UWorld* World = GetWorld();
-
 	if (!ensure(World != nullptr)) return false;
 
 	APlayerController* PlayerController = World->GetFirstPlayerController();

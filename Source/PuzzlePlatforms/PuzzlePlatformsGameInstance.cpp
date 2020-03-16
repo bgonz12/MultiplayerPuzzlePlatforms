@@ -86,4 +86,3 @@ void UPuzzlePlatformsGameInstance::Disconnect()
 
 	PlayerController->ClientTravel("/Game/MenuSystem/MainMenu", ETravelType::TRAVEL_Absolute);
 }
-
