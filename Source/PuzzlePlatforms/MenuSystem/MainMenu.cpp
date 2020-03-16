@@ -4,14 +4,21 @@
 #include "MainMenu.h"
 
 #include "Components/Button.h"
+#include "Components/WidgetSwitcher.h"
 
 bool UMainMenu::Initialize()
 {
 	bool Success = Super::Initialize();
 	if (!Success) return false;
 
-	if (!ensure(HostButton != nullptr)) return false;
-	HostButton->OnClicked.AddDynamic(this, &UMainMenu::HostServer);
+	if (!ensure(HostMainMenuButton != nullptr)) return false;
+	HostMainMenuButton->OnClicked.AddDynamic(this, &UMainMenu::HostServer);
+
+	if (!ensure(JoinMainMenuButton != nullptr)) return false;
+	JoinMainMenuButton->OnClicked.AddDynamic(this, &UMainMenu::OpenJoinMenu);
+
+	if (!ensure(CancelJoinMenuButton != nullptr)) return false;
+	CancelJoinMenuButton->OnClicked.AddDynamic(this, &UMainMenu::OpenMainMenu);
 
 	this->bIsFocusable = true;
 	this->AddToViewport();
@@ -53,6 +60,20 @@ void UMainMenu::HostServer()
 	{
 		MenuInterface->Host();
 	}
+}
+
+void UMainMenu::OpenMainMenu()
+{
+	if (!ensure(MenuSwitcher != nullptr)) return;
+	if (!ensure(MainMenu != nullptr)) return;
+	MenuSwitcher->SetActiveWidget(MainMenu);
+}
+
+void UMainMenu::OpenJoinMenu()
+{
+	if (!ensure(MenuSwitcher != nullptr)) return;
+	if (!ensure(JoinMenu != nullptr)) return;
+	MenuSwitcher->SetActiveWidget(JoinMenu);
 }
 
 void UMainMenu::SetMenuInterface(IMenuInterface* MenuInterfaceToSet)
