@@ -24,38 +24,7 @@ bool UMainMenu::Initialize()
 	if (!ensure(CancelJoinMenuButton != nullptr)) return false;
 	CancelJoinMenuButton->OnClicked.AddDynamic(this, &UMainMenu::OpenMainMenu);
 
-	this->bIsFocusable = true;
-	this->AddToViewport();
-
-	UWorld* World = GetWorld();
-
-	if (!ensure(World != nullptr)) return false;
-
-	APlayerController* PlayerController = World->GetFirstPlayerController();
-	if (!ensure(PlayerController != nullptr)) return false;
-
-	FInputModeUIOnly InputData;
-	InputData.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
-	InputData.SetWidgetToFocus(this->TakeWidget());
-
-	PlayerController->SetInputMode(InputData);
-	PlayerController->bShowMouseCursor = true;
-
 	return true;
-}
-
-void UMainMenu::OnLevelRemovedFromWorld(ULevel* InLevel, UWorld* InWorld)
-{
-	this->RemoveFromViewport();
-
-	if (!ensure(InWorld != nullptr)) return;
-
-	APlayerController* PlayerController = InWorld->GetFirstPlayerController();
-	if (!ensure(PlayerController != nullptr)) return;
-
-	FInputModeGameOnly InputData;
-	PlayerController->SetInputMode(InputData);
-	PlayerController->bShowMouseCursor = false;
 }
 
 void UMainMenu::HostServer()

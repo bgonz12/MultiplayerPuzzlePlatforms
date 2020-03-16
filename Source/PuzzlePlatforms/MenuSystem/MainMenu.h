@@ -18,8 +18,6 @@ class PUZZLEPLATFORMS_API UMainMenu : public UMenuWidget
 protected:
 	virtual bool Initialize() override;
 
-	virtual void OnLevelRemovedFromWorld(ULevel* InLevel, UWorld* InWorld) override;
-
 private:
 	UPROPERTY(Meta = (BindWidget))
 	class UButton* HostMainMenuButton;

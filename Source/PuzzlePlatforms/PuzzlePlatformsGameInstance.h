@@ -27,10 +27,13 @@ public:
 	void LoadInGameMenu();
 
 	UFUNCTION(Exec)
-	void Host();
+	void Host() override;
 
 	UFUNCTION(Exec)
-	void Join(const FString& IpAddress);
+	void Join(const FString& IpAddress) override;
+
+	UFUNCTION(Exec)
+	void Disconnect() override;
 
 private:
 	TSubclassOf<class UUserWidget> MainMenuClass;

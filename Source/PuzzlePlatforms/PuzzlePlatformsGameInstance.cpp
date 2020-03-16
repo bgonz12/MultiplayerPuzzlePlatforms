@@ -43,6 +43,9 @@ void UPuzzlePlatformsGameInstance::LoadInGameMenu()
 	if (!ensure(InGameMenuClass != nullptr)) return;
 
 	UMenuWidget* Menu = CreateWidget<UMenuWidget>(this, InGameMenuClass);
+	if (!ensure(Menu != nullptr)) return;
+
+	Menu->SetMenuInterface(this);
 }
 
 void UPuzzlePlatformsGameInstance::Host()
@@ -70,3 +73,17 @@ void UPuzzlePlatformsGameInstance::Join(const FString& IpAddress)
 
 	PlayerController->ClientTravel(IpAddress, ETravelType::TRAVEL_Absolute);
 }
+
+void UPuzzlePlatformsGameInstance::Disconnect()
+{
+	UEngine* Engine = GetEngine();
+	if (!ensure(Engine != nullptr)) return;
+
+	Engine->AddOnScreenDebugMessage(0, 2.0f, FColor::Green, FString::Printf(TEXT("Disconnected")));
+
+	APlayerController* PlayerController = GetFirstLocalPlayerController();
+	if (!ensure(PlayerController != nullptr)) return;
+
+	PlayerController->ClientTravel("/Game/MenuSystem/MainMenu", ETravelType::TRAVEL_Absolute);
+}
+

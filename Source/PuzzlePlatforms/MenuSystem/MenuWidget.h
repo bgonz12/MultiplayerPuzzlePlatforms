@@ -14,9 +14,16 @@ UCLASS()
 class PUZZLEPLATFORMS_API UMenuWidget : public UUserWidget
 {
 	GENERATED_BODY()
-	
 
 protected:
+	virtual bool Initialize() override;
+
+	virtual void OnLevelRemovedFromWorld(ULevel* InLevel, UWorld* InWorld) override;
+
+	virtual bool Setup();
+
+	virtual void Teardown();
+
 	IMenuInterface * MenuInterface;
 
 public:

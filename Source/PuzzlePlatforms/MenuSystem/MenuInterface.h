@@ -25,4 +25,6 @@ public:
 	virtual void Host() = 0;
 
 	virtual void Join(const FString& IpAddress) = 0;
+
+	virtual void Disconnect() = 0;
 };
